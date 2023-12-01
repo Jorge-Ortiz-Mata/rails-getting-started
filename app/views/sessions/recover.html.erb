@@ -1,0 +1,41 @@
+<div class="bg-white">
+  <div class="flex flex-col h-screen border">
+    <%= render 'shared/navbar' %>
+
+    <section class="flex flex-col justify-center items-center sm:px-6 lg:px-8 h-full gap-10">
+      <div class="w-full md:w-7/12 flex flex-col gap-5">
+        <% if @user %>
+          <%= form_with(model: @recover, url: recover_password_path(@user.recover_token), method: :patch, class: 'flex flex-col w-full gap-10') do |f| %>
+            <h2 class="mt-6 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">Recuperar mi contraseña</h2>
+
+            <div class="flex flex-col w-full items-start">
+              <%= f.label :password, 'Contraseña:', class: 'label-style' %>
+              <%= f.password_field :password, class: "input-style #{ error_border(@recover.errors.include?(:password)) }" %>
+              <span class="text-sm text-sidebarTextColor text-slate-300 italic">La contraseña debe tener al menos 8 caracteres</span>
+              <% if @recover.errors.include?(:password) %>
+                <%= render 'shared/error_input', { object: @recover, attribute: :password } %>
+              <% end %>
+            </div>
+
+            <div class="flex flex-col w-full items-start">
+              <%= f.label :password_confirmation, 'Confirmar contraseña:', class: 'label-style' %>
+              <%= f.password_field :password_confirmation, class: "input-style #{ error_border(@recover.errors.include?(:password_confirmation)) }" %>
+              <% if @recover.errors.include?(:password_confirmation) %>
+                <%= render 'shared/error_input', { object: @recover, attribute: :password_confirmation } %>
+              <% end %>
+            </div>
+
+            <div class="flex flex-col w-full items-center mt-10">
+              <%= f.submit "Actualizar contraseña", class: 'flex w-full justify-center rounded-md bg-red-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-red-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-red-600' %>
+            </div>
+          <% end %>
+        <% else %>
+          <p class="font-medium text-red-600 text-sidebarwhite text-center text-sm sm:text-base">
+            Esta URL ya no es valida. <br>
+            Es posible que el link haya expirado o que ya no esté disponible
+          </p>
+        <% end %>
+      </div>
+    </section>
+  </div>
+</div>

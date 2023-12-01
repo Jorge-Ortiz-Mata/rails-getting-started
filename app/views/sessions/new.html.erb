@@ -1,0 +1,46 @@
+<div class="flex min-h-screen">
+  <div class="flex flex-1 flex-col justify-center px-4 py-12 sm:px-6 lg:flex-none lg:px-20 xl:px-24 w-6/12">
+    <div class="mx-auto w-full max-w-sm lg:w-96">
+      <div>
+        <h2 class="mt-8 text-2xl font-bold leading-9 tracking-tight text-gray-900 text-center">Inicia sesión con tu cuenta</h2>
+        <p class="mt-2 text-sm leading-6 text-gray-500 text-center">
+          ¿No tienes una cuenta?
+          <%= link_to signup_path, class: 'font-semibold text-red-600 hover:text-red-500' do %>
+            Registrate de manera gratuita
+          <% end %>
+        </p>
+      </div>
+
+      <div class="mt-10 flex flex-col gap-10">
+        <%= form_with(model: @session, url: login_path, id: 'session', class: 'flex flex-col w-full gap-5') do |form| %>
+          <div class="flex flex-col w-full items-start gap-1 mb-5">
+            <%= form.label :email, 'Correo electrónico:', class: 'block text-sm font-medium leading-6 text-gray-900' %>
+            <%= form.email_field :email, class: "input-style border #{error_border(@session.errors.include?(:email))}" %>
+            <% if @session.errors.include?(:email) %>
+              <%= render 'shared/error_input', { object: @session, attribute: :email } %>
+            <% end %>
+          </div>
+
+          <div class="flex flex-col w-full items-start gap-1 mb-5">
+            <%= form.label :password, 'Contraseña:', class: 'block text-sm font-medium leading-6 text-gray-900' %>
+            <%= form.password_field :password, class: "input-style border #{error_border(@session.errors.include?(:password))}" %>
+            <% if @session.errors.include?(:password) %>
+              <%= render 'shared/error_input', { object: @session, attribute: :password } %>
+            <% end %>
+          </div>
+
+          <div class="flex flex-col items-center justify-center w-full">
+            <%= form.submit 'Iniciar sesión', class: 'flex w-full justify-center rounded-md bg-red-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-red-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600' %>
+          </div>
+        <% end %>
+
+        <div class="border w-full"></div>
+
+        <div class="flex flex-col gap-3 items-center justify-center w-full">
+          <%= link_to 'Olvidé mi contraseña', instructions_path, class: 'text-red-500 leading-6 duration-300 hover:text-red-600 hover:scale-105 text-style underline font-semibold text-sm' %>
+          <%= link_to 'Reenviar correo de confirmación', confirmation_path, class: 'text-red-500 leading-6 duration-300 hover:text-red-600 hover:scale-105 text-style underline font-semibold text-sm' %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
