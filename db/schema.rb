@@ -16,9 +16,9 @@ ActiveRecord::Schema[7.0].define(version: 2023_11_30_232037) do
     t.string "uid"
     t.string "token_id"
     t.string "password_digest"
-    t.string "recover_password"
+    t.string "recover_token"
     t.integer "role", default: 0
-    t.boolean "active", default: false
+    t.boolean "is_confirmed?", default: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

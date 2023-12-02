@@ -13,7 +13,7 @@ class SessionsController < AuthenticatedController
 
     if @session.save
       session[:user_id] = User.find_by(email: authentication_session_params[:email]).id
-      redirect_to appointments_path
+      redirect_to root_path
     else
       render :new, status: :unprocessable_entity
     end

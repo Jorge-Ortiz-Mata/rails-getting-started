@@ -5,9 +5,9 @@ class CreateUsers < ActiveRecord::Migration[7.0]
       t.string :uid
       t.string :token_id
       t.string :password_digest
-      t.string :recover_password
+      t.string :recover_token
       t.integer :role, default: 0
-      t.boolean :active, default: false
+      t.boolean :is_confirmed?, default: false
 
       t.timestamps
     end

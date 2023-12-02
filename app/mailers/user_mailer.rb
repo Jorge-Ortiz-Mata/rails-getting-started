@@ -4,7 +4,13 @@ class UserMailer < ApplicationMailer
 
   def send_email_confirmation
     @user = params[:user]
-    @url = "http://127.0.0.1:3000/email/confirmation/#{@user.token_id}"
-    mail(to: @user.email, subject: 'My App - Email Confirmation')
+    @url = "http://localhost:3000/email/confirmation/#{@user.uid}"
+    mail(to: @user.email, subject: 'Kalenda - Confirmación de correo electrónico')
+  end
+
+  def password_instructions
+    @user = params[:user]
+    @url = "http://localhost:3000/recover/#{@user.recover_token}"
+    mail(to: @user.email, subject: 'Kalenda - Recuperación de contraseña')
   end
 end

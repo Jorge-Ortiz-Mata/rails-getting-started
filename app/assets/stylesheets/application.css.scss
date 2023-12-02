@@ -15,3 +15,17 @@
  */
 
 @import "font-awesome";
+
+.field_with_errors {
+  width: 100%;
+  margin-bottom: 2px;
+}
+
+.trix-button--icon-attach {
+  display: none;
+}
+
+.required::after {
+  content: ' *';
+  color: #ed2626;
+}
